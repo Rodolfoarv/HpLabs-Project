@@ -32,10 +32,11 @@ $ g++ -std=c++0x your_file.cpp -o your_program
 #include <vector>
 #include <string>
 #include <random>
+#include "generator.h"
 
 using namespace std;
 
-string join( vector<float>& elements, string delimiter )
+string Generator::join( vector<float>& elements, string delimiter )
 {
     stringstream ss;
     size_t elems = elements.size(),
@@ -52,31 +53,75 @@ string join( vector<float>& elements, string delimiter )
     return ss.str();
 }
 
+void Generator::generate_files(){
+  //int upper_bound = std::numeric_limits<int>::max();
+  int upper_bound = 1000;
+
+  random_device rd;
+  mt19937 gen(rd());
+  normal_distribution<float> gaussian_dist(0.0,1.0);
+  auto gaussian_generator = std::bind(gaussian_dist, gen);
+  vector<float> vec(1000, 0.0);
+
+  for (int i=0; i< upper_bound; i++) {
+      std::generate(vec.begin(), vec.end(),gaussian_generator);
+      string histogram = join(vec, ",");
+
+      std::ofstream fs(std::to_string(i) + ".txt");
+      if(!fs)
+      {
+          cout <<"ERROR: can not open/create file [" << i << ".txt]" << endl;
+
+      }
+
+      fs<< i << "\t" << histogram;
+      fs.close();
+  }
+
+  // Note that we could actually add into the Hash the contents of the file to optimize this
+  // However in order to respect the structure of the program and to not have a Hash full of items
+  // we will read the file as the user requests it in the read_file method, this will also
+  // make the reading more efficient since we will check if the hashmap already containts the key
+
+  cout << "Generation step is complete." << endl;
+}
+
+void Generator::read_file(const string& name)
+{
+  std::string _contents;
+	// Open the file
+	std::fstream input(name, std::fstream::in);
+
+	// Parse file
+	if (input.is_open())
+	{
+  #ifdef _DEBUG
+  		std::cout << "File " << name << " opened." << std::endl;
+  #endif
+
+		std::stringstream buffer;
+		buffer << input.rdbuf();
+		_contents = buffer.str();
+
+		// Close file
+		input.close();
+	}
+  std::cout << _contents;
+
+}
+
+Generator::Generator(){
+
+}
+
+Generator::~Generator(){
+
+}
+
 int main(int argc, char ** argv)
 {
-    //int upper_bound = std::numeric_limits<int>::max();
-    int upper_bound = 1000;
+  Generator files = Generator();
+  files.generate_files();
+  files.read_file("1.txt");
 
-    random_device rd;
-    mt19937 gen(rd());
-    normal_distribution<float> gaussian_dist(0.0,1.0);
-    auto gaussian_generator = std::bind(gaussian_dist, gen);
-    vector<float> vec(1000, 0.0);
-
-    for (int i=0; i< upper_bound; i++) {
-        std::generate(vec.begin(), vec.end(),gaussian_generator);
-        string histogram = join(vec, ",");
-
-        std::ofstream fs(std::to_string(i) + ".txt");
-        if(!fs)
-        {
-            cout <<"ERROR: can not open/create file [" << i << ".txt]" << endl;
-            return 1;
-        }
-
-        fs<< i << "\t" << histogram;
-        fs.close();
-    }
-
-    cout << "Generation step is complete." << endl;
 }
