@@ -34,6 +34,8 @@ $ g++ -std=c++0x your_file.cpp -o your_program
 #include <random>
 #include "generator.h"
 
+
+
 using namespace std;
 
 string Generator::join( vector<float>& elements, string delimiter )
@@ -54,8 +56,8 @@ string Generator::join( vector<float>& elements, string delimiter )
 }
 
 void Generator::generate_files(){
-  //int upper_bound = std::numeric_limits<int>::max();
-  int upper_bound = 1000;
+  //  upper_bound = std::numeric_limits<int>::max();
+  int upper_bound = 10;
 
   random_device rd;
   mt19937 gen(rd());
@@ -86,8 +88,14 @@ void Generator::generate_files(){
   cout << "Generation step is complete." << endl;
 }
 
-void Generator::read_file(const string& name)
+std::vector<float> Generator::read_file(const string& name)
 {
+
+  //Validate if the hash contains the file already
+  if (files.find(name) != files.end()){
+    std::cout << "map already contains this key!\n"; // return the vector
+    return files[name];
+  }
   std::string _contents;
 	// Open the file
 	std::fstream input(name, std::fstream::in);
@@ -106,9 +114,34 @@ void Generator::read_file(const string& name)
 		// Close file
 		input.close();
 	}
-  std::cout << _contents;
+
+  //Get the contents of the file without the name
+  std::string chart = _contents.substr(2);
+  std::vector<float> chart_values;
+  std::stringstream ss(chart);
+
+  float i;
+
+  while (ss >> i)
+  {
+      chart_values.push_back(i);
+      if (ss.peek() == ',')
+      ss.ignore();
+  }
+
+  // for (i=0; i< chart_values.size(); i++)
+  // std::cout << chart_values.at(i)<<std::endl;
+
+  files[name] = chart_values;
+  return chart_values;
+
+
 
 }
+
+
+
+
 
 Generator::Generator(){
 
@@ -120,8 +153,9 @@ Generator::~Generator(){
 
 int main(int argc, char ** argv)
 {
-  Generator files = Generator();
-  files.generate_files();
-  files.read_file("1.txt");
+  Generator result = Generator();
+  result.generate_files();
+  result.read_file("1.txt");
+  result.read_file("1.txt");
 
 }
