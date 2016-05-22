@@ -33,7 +33,7 @@ $(document).ready(() =>{
       success: result => {
         if (result.exists){
           console.log("Generating chart");
-          generate_chart();
+          generate_chart(result.name, result.data);
         }
       }
     });
@@ -45,25 +45,19 @@ $(document).ready(() =>{
 
 //------------------------------------------------------------------------------
 
-function generate_chart(){
-
+function generate_chart(file_title, chart_data){
+  $('chart_title').text(file_title);
   google.charts.setOnLoadCallback(function(){
-    var data = google.visualization.arrayToDataTable(
-      [ [ 'Value' ],
-      [ -2.06106 ],
-      [ -1.98222 ],
-      [ 0.0281387 ],
-      [ 0.160025 ],
-      [ 1.55722 ],
-      [ 0.462473 ],
-      [ -1.51787 ],
-      [ -0.25794 ],
-      [ 0.0837762 ],
-      [ 0.275901 ] ]);
+    var data = google.visualization.arrayToDataTable(chart_data);
 
     var options = {
-      title: 'Lengths of dinosaurs, in meters',
+      title: "Histogram",
       legend: { position: 'none' },
+      animation:{
+        startup: true,
+        easing: 'in',
+      },
+      colors: ['green'],
     };
     var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
     chart.draw(data, options);
