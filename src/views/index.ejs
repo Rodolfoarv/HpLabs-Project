@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/png" href="assets/img/favicon.ico">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>HpLabs Project</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+
+    <!-- Bootstrap core CSS     -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Animation library for notifications   -->
+    <link href="/css/animate.min.css" rel="stylesheet"/>
+    <!--  Light Bootstrap Table core CSS    -->
+    <link href="/css/light-bootstrap-dashboard.css" rel="stylesheet"/>
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="/css/pe-icon-7-stroke.css" rel="stylesheet" />
+		<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+		<script type="text/javascript">
+			google.charts.load("current", {packages:["corechart"]});
+			google.charts.setOnLoadCallback(drawChart);
+			function drawChart() {
+				var data = google.visualization.arrayToDataTable([
+					['Dinosaur', 'Length'],
+					['Acrocanthosaurus (top-spined lizard)', 12.2],
+					['Albertosaurus (Alberta lizard)', 9.1],
+					['Allosaurus (other lizard)', 12.2],
+					['Apatosaurus (deceptive lizard)', 22.9],
+					['Archaeopteryx (ancient wing)', 0.9],
+					['Argentinosaurus (Argentina lizard)', 36.6],
+					['Baryonyx (heavy claws)', 9.1],
+					['Brachiosaurus (arm lizard)', 30.5],
+					['Ceratosaurus (horned lizard)', 6.1],
+					['Coelophysis (hollow form)', 2.7],
+					['Compsognathus (elegant jaw)', 0.9],
+					['Deinonychus (terrible claw)', 2.7],
+					['Diplodocus (double beam)', 27.1],
+					['Dromicelomimus (emu mimic)', 3.4],
+					['Gallimimus (fowl mimic)', 5.5],
+					['Mamenchisaurus (Mamenchi lizard)', 21.0],
+					['Megalosaurus (big lizard)', 7.9],
+					['Microvenator (small hunter)', 1.2],
+					['Ornithomimus (bird mimic)', 4.6],
+					['Oviraptor (egg robber)', 1.5],
+					['Plateosaurus (flat lizard)', 7.9],
+					['Sauronithoides (narrow-clawed lizard)', 2.0],
+					['Seismosaurus (tremor lizard)', 45.7],
+					['Spinosaurus (spiny lizard)', 12.2],
+					['Supersaurus (super lizard)', 30.5],
+					['Tyrannosaurus (tyrant lizard)', 15.2],
+					['Ultrasaurus (ultra lizard)', 30.5],
+					['Velociraptor (swift robber)', 1.8]]);
+
+				var options = {
+					title: 'Lengths of dinosaurs, in meters',
+					legend: { position: 'none' },
+				};
+
+				var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+				chart.draw(data, options);
+			}
+		</script>
+
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
+
+    <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+    	<div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="" class="simple-text">
+                    Hp Labs Project
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li class="active">
+                    <a href="dashboard.html">
+                        <i class="pe-7s-graph"></i>
+                        <p>Single File Upload</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="user.html">
+                        <i class="pe-7s-user"></i>
+                        <p>Student Information</p>
+                    </a>
+                </li>
+								<
+            </ul>
+    	</div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+                <div class="navbar-header">
+
+                    <a class="navbar-brand" href="#">Hp Labs Dashboard</a>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4">
+
+
+											<form id="file_name" method="POST">
+											<input type="text" class="form-control input" id="tf_name" name="filename" placeholder="Enter the name of the text file.." />
+											<br />
+											<button id="btn_create_game" type="submit" class="btn btn-primary btn"> Generate Chart </button>
+
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Users Behavior</h4>
+                            </div>
+                            <div class="content">
+                                <div id="chart_div" class="ct-chart"></div>
+																<!-- <div id="chartHours" class="ct-chart"></div> -->
+                                <div class="footer">
+                                    <hr>
+                                    <div class="stats">
+                                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+
+                <p class="copyright pull-right">
+                    &copy; 2016 <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                </p>
+            </div>
+        </footer>
+
+    </div>
+</div>
+
+
+</body>
+
+    <!--   Core JS Files   -->
+    <script src="/js/jquery-1.10.2.js" type="text/javascript"></script>
+	<script src="/js/bootstrap.min.js" type="text/javascript"></script>
+
+	<!--  Checkbox, Radio & Switch Plugins -->
+	<script src="/js/bootstrap-checkbox-radio-switch.js"></script>
+
+	<!--  Charts Plugin -->
+	<script src="/js/chartist.min.js"></script>
+
+    <!--  Notifications Plugin    -->
+    <script src="/js/bootstrap-notify.js"></script>
+
+    <!--  Google Maps Plugin    -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+	<script src="/js/light-bootstrap-dashboard.js"></script>
+
+	<script type="text/javascript">
+    	$(document).ready(function(){
+
+        	demo.initChartist();
+
+        	$.notify({
+            	icon: 'pe-7s-file',
+            	message: "Welcome to <b>HpLabs Chart Project</b> to get started write the name of the textfile"
+
+            },{
+                type: 'info',
+                timer: 4000
+            });
+
+    	});
+	</script>
+
+</html>
