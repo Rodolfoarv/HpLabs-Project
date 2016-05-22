@@ -20,15 +20,20 @@ function promisify(fun) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  var generated_chart = chart.generate_chart(generator.get_chart_data("9.txt"));
-  res.render('index', { title: 'Express',
-                        chart: generated_chart});
+  res.render('index', { title: 'Express'
+                        });
 });
 
 
 router.post('/hplabs/', (req,res) => {
   let filename = req.body.filename;
-  let result = {exists: true};
+  let result = {};
+  var chart_data = chart.generate_chart(generator.get_chart_data(filename));
+  if (chart_data == ""){
+    result = {exists : false, name: filename};
+  }else{
+    result = {exists: true, data : chart_data, name : filename};
+  }
   res.json(result);
 
 });
