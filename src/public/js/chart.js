@@ -4,6 +4,7 @@
 
 $(document).ready(() =>{
   $('#form_file_name').submit(create_chart);
+  google.charts.load("current", {packages:["corechart"]});
   // $('#btn_create_chart').click(create_chart);
 
   $.notify({
@@ -45,10 +46,8 @@ $(document).ready(() =>{
 //------------------------------------------------------------------------------
 
 function generate_chart(){
-  google.charts.load("current", {packages:["corechart"]});
-  console.log("Right here budd")
+
   google.charts.setOnLoadCallback(function(){
-    console.log("Thats right");
     var data = google.visualization.arrayToDataTable(
       [ [ 'Value' ],
       [ -2.06106 ],
@@ -66,8 +65,7 @@ function generate_chart(){
       title: 'Lengths of dinosaurs, in meters',
       legend: { position: 'none' },
     };
-
-    var chart = new google.visualization.Histogram('#chart_div');
+    var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
     chart.draw(data, options);
   });
 }
