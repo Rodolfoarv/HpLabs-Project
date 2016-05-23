@@ -12,13 +12,14 @@
 using namespace v8;
 Generator gen = Generator();
 
-
+void GenerateFiles(const v8::FunctionCallbackInfo<v8::Value>& args){
+  gen.generate_files();
+}
 
 //The reason the function is called GetData in mayus is dictated by the node/v8 API
 void GetChartData(const v8::FunctionCallbackInfo<v8::Value>& args) {
   v8::String::Utf8Value name(args[0]->ToString());
   std::string filename = std::string(*name);
-  gen.generate_files();
   std::string retrieved_data = gen.read_file(filename);
   v8::Local<v8::String> retval = v8::String::NewFromUtf8(v8::Isolate::GetCurrent(), retrieved_data.c_str());
   args.GetReturnValue().Set(retval);
@@ -41,6 +42,7 @@ void init(Handle <Object> exports, Handle<Object> module) {
  // we'll register our functions to make them callable from node here..
  NODE_SET_METHOD(exports, "get_chart_data", GetChartData);
  NODE_SET_METHOD(exports, "get_combined_chart", GetCombinedChart);
+ NODE_SET_METHOD(exports, "generate_files", GenerateFiles);
 }
 
 // associates the module name with initialization logic

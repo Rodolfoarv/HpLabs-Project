@@ -11,6 +11,7 @@ public:
   Generator();
   ~Generator();
   std::map<std::string, std::string > files;
+  bool files_generated;
   string join( vector<float>& elements, string delimiter );
   void generate_files();
   string read_file(const string& name);

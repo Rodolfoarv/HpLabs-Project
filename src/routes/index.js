@@ -20,19 +20,20 @@ function promisify(fun) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  generator.generate_files();
   res.render('index', { title: 'Express'
                         });
 });
 
 router.get('/student_information', function(req, res, next) {
+  generator.generate_files();
   res.render('student_information', {});
 });
 
-router.get('/compare_charts', function(req, res, next) {
-  res.render('compare_charts', {});
+router.get('/combine_charts', function(req, res, next) {
+  generator.generate_files();
+  res.render('combine_charts', {});
 });
-
-
 
 router.post('/hplabs/submit_single/', (req,res) => {
   let filename = req.body.filename + '.txt';

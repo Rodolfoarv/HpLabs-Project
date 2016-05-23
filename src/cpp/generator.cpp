@@ -56,6 +56,9 @@ string Generator::join( vector<float>& elements, string delimiter )
 }
 
 void Generator::generate_files(){
+  if (files_generated){
+    return;
+  }
   //  upper_bound = std::numeric_limits<int>::max();
   int upper_bound = 10;
 
@@ -79,6 +82,7 @@ void Generator::generate_files(){
       fs<< i << "\t" << histogram;
       fs.close();
   }
+  files_generated = true;
 
   // Note that we could actually add into the Hash the contents of the file to optimize this
   // However in order to respect the structure of the program and to not have a Hash full of items
@@ -148,6 +152,7 @@ string Generator::combine_charts(const string& c1, const string& c2){
 
 
 Generator::Generator(){
+  files_generated = false;
 }
 
 Generator::~Generator(){
