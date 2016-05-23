@@ -69,7 +69,6 @@ function compare_charts(event){
 
 function generate_chart(file_title, chart_data){
   $('#chart_title').text(file_title);
-  // google.charts.load("current", {packages:["controls"]});
   google.charts.setOnLoadCallback(function(){
     var data = google.visualization.arrayToDataTable(chart_data);
     var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard_div'));
@@ -82,6 +81,7 @@ function generate_chart(file_title, chart_data){
       'state': {'lowValue': -2.0, 'highValue': 2.0}
       });
 
+
     // Create the histogram with the data provided
     var histogram = new google.visualization.ChartWrapper({
       'chartType': 'Histogram',
@@ -92,9 +92,16 @@ function generate_chart(file_title, chart_data){
       'view': {'columns': [0,1]}
     });
 
+    // Wait for the chart to finish drawing before calling the getImageURI() method.
+    google.visualization.events.addListener(histogram, 'ready', function() {
+        console.log(histogram.getChart().getImageURI());
+            document.getElementById('png').innerHTML = '<a href="' + histogram.getChart().getImageURI() + '" target="_blank download">Download as PNG</a>';
+    });
+
     dashboard.bind(rangeSlider, histogram);
     // Draw the dashboard.
     dashboard.draw(data);
+
   });
 
 }
