@@ -10,9 +10,10 @@ class Generator{
 public:
   Generator();
   ~Generator();
-  std::map<std::string, std::vector<float> > files;
+  std::map<std::string, std::string > files;
   string join( vector<float>& elements, string delimiter );
   void generate_files();
-  std::vector<float> read_file(const string& name);
+  string read_file(const string& name);
+  string combine_charts(const string& c1, const string& c2);
 
 };

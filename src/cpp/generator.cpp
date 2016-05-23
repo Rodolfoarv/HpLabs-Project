@@ -83,20 +83,21 @@ void Generator::generate_files(){
   // Note that we could actually add into the Hash the contents of the file to optimize this
   // However in order to respect the structure of the program and to not have a Hash full of items
   // we will read the file as the user requests it in the read_file method, this will also
-  // make the reading more efficient since we will check if the hashmap already containts the key
+  // make the reading more efficient since we will check if the hashmap already containts the key,
+  // if it does, then we will dispatch the request with the value of the key.
 
   cout << "Generation step is complete." << endl;
 }
 
-std::vector<float> Generator::read_file(const string& name)
+string Generator::read_file(const string& name)
 {
 
   //Validate if the hash contains the file already
   if (files.find(name) != files.end()){
-    std::cout << "map already contains this key!\n"; // return the vector
+    std::cout << "map already contains this key!" << name << endl; // return the vector
     return files[name];
   }
-  std::string _contents;
+  string _contents;
 	// Open the file
 	std::fstream input(name, std::fstream::in);
 
@@ -115,47 +116,48 @@ std::vector<float> Generator::read_file(const string& name)
 		input.close();
 	}
 
+  if (_contents == "") return "";
+
   //Get the contents of the file without the name
-  std::string chart = _contents.substr(2);
-  std::vector<float> chart_values;
-  std::stringstream ss(chart);
-
-  float i;
-
-  while (ss >> i)
-  {
-      chart_values.push_back(i);
-      if (ss.peek() == ',')
-      ss.ignore();
-  }
+  string chart = _contents.substr(2);
+  // std::vector<float> chart_values;
+  // std::stringstream ss(chart);
+  //
+  // float i;
+  //
+  // while (ss >> i)
+  // {
+  //     chart_values.push_back(i);
+  //     if (ss.peek() == ',')
+  //     ss.ignore();
+  // }
 
   // for (i=0; i< chart_values.size(); i++)
   // std::cout << chart_values.at(i)<<std::endl;
 
-  files[name] = chart_values;
-  return chart_values;
-
-
+  files[name] = chart;
+  return chart;
 
 }
 
-
-
+string Generator::combine_charts(const string& c1, const string& c2){
+  string data1 = read_file(c1);
+  string data2 = read_file(c2);
+  return read_file(c1).substr(0, data1.size() - 1 ) + "," + read_file(c2);
+}
 
 
 Generator::Generator(){
-
 }
 
 Generator::~Generator(){
-
 }
 
 int main(int argc, char ** argv)
 {
   Generator result = Generator();
-  result.generate_files();
-  result.read_file("1.txt");
-  result.read_file("1.txt");
+  // result.generate_files();
+  cout << result.combine_charts("0.txt", "1.txt");
+
 
 }
