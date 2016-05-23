@@ -56,7 +56,9 @@ function compare_charts(event){
         console.log(result);
         if (result.exists){
           notify_user("The file <b>" + result.name + "</b> has been found successfully", 'success')
-          generate_chart(result.name, result.data);
+          var bucketSize = $('#tf_bucketsize').val();
+          console.log(bucketSize);
+          generate_chart(result.name, result.data, bucketSize);
         }else{
           notify_user("The file <b>" + result.name + "</b> does not exist", 'danger')
         }
@@ -67,7 +69,7 @@ function compare_charts(event){
 
 //------------------------------------------------------------------------------
 
-function generate_chart(file_title, chart_data){
+function generate_chart(file_title, chart_data, bucketSize = 0){
   $('#chart_title').text(file_title);
   google.charts.setOnLoadCallback(function(){
     var data = google.visualization.arrayToDataTable(chart_data);
@@ -87,7 +89,8 @@ function generate_chart(file_title, chart_data){
       'chartType': 'Histogram',
       'containerId': 'chart_div',
       'options': {
-        'legend': 'right'
+        'legend': 'right',
+        'histogram': { 'bucketSize': bucketSize }
       },
       'view': {'columns': [0,1]}
     });
