@@ -1,3 +1,5 @@
+// Author: Rodolfo Andrés Ramírez Valenzuela
+
 module.exports = {
   generate_chart: function(data) {
     console.log(data);

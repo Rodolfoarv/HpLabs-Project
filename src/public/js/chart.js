@@ -1,3 +1,6 @@
+// Author: Rodolfo Andrés Ramírez Valenzuela
+
+
 'use strict'
 
 $(document).ready(() =>{
@@ -5,6 +8,7 @@ $(document).ready(() =>{
   $('#form_compare').submit(compare_charts);
   google.charts.load('current', {'packages':['corechart', 'controls']});
   notify_user("Welcome to <b>HpLabs Chart Project</b> to get started write the name of the textfile", 'info');
+//------------------------------------------------------------------------------
 
   function notify_user(notification_message, notification_type){
     $.notify({
@@ -17,7 +21,11 @@ $(document).ready(() =>{
       });
   }
 
+//------------------------------------------------------------------------------
 
+//------------------------------------------------------------------------------
+
+// Function that receives the 2 files and mix them
 function compare_charts(event){
   event.preventDefault();
   var filename1 = $('#tf_compare1').val().trim();
@@ -44,7 +52,7 @@ function compare_charts(event){
   });
 }
 
-
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
   function create_chart(event){
@@ -76,9 +84,12 @@ function compare_charts(event){
     });
   }
 
+//------------------------------------------------------------------------------
 
 //------------------------------------------------------------------------------
 
+// Function that will generate the chart and a dashboard which will have all the specifications
+// the user gave on the html
 function generate_chart(file_title, chart_data, bucketSize = 0, bucketNumber, min = -2.0, max = 2.0){
   $('#chart_title').text(file_title);
   google.charts.setOnLoadCallback(function(){
@@ -122,3 +133,4 @@ function generate_chart(file_title, chart_data, bucketSize = 0, bucketNumber, mi
 
 }
 });
+//------------------------------------------------------------------------------

@@ -16,12 +16,11 @@
  * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  *
- *$ g++ -std=c++11 your_file.cpp -o your_program
 
-or
-
-$ g++ -std=c++0x your_file.cpp -o your_program
  */
+
+// Author: Rodolfo Andrés Ramírez Valenzuela
+
 
 #include <iostream>
 #include <fstream>
@@ -38,6 +37,7 @@ $ g++ -std=c++0x your_file.cpp -o your_program
 
 using namespace std;
 
+//Function provided by the requirements
 string Generator::join( vector<float>& elements, string delimiter )
 {
     stringstream ss;
@@ -54,13 +54,13 @@ string Generator::join( vector<float>& elements, string delimiter )
 
     return ss.str();
 }
-
+//Function provided by the requirements
 void Generator::generate_files(){
   if (files_generated){
     return;
   }
   //  upper_bound = std::numeric_limits<int>::max();
-  int upper_bound = 10;
+  int upper_bound = 1000;
 
   random_device rd;
   mt19937 gen(rd());
@@ -93,6 +93,8 @@ void Generator::generate_files(){
   cout << "Generation step is complete." << endl;
 }
 
+//Function that reads a file the client requests, it receives the name as parameter
+//and returns the contents as a result
 string Generator::read_file(const string& name)
 {
 
@@ -124,45 +126,23 @@ string Generator::read_file(const string& name)
 
   //Get the contents of the file without the name
   string chart = _contents.substr(2);
-  // std::vector<float> chart_values;
-  // std::stringstream ss(chart);
-  //
-  // float i;
-  //
-  // while (ss >> i)
-  // {
-  //     chart_values.push_back(i);
-  //     if (ss.peek() == ',')
-  //     ss.ignore();
-  // }
-
-  // for (i=0; i< chart_values.size(); i++)
-  // std::cout << chart_values.at(i)<<std::endl;
-
   files[name] = chart;
   return chart;
 
 }
 
+// Function that will combine two charts, the user requests, returns the contents of the two files
 string Generator::combine_charts(const string& c1, const string& c2){
   string data1 = read_file(c1);
   string data2 = read_file(c2);
   return read_file(c1).substr(0, data1.size() - 1 ) + "," + read_file(c2);
 }
 
-
+// Constructor of the Generator class
 Generator::Generator(){
   files_generated = false;
 }
 
+//Destructor of the Generator class
 Generator::~Generator(){
-}
-
-int main(int argc, char ** argv)
-{
-  Generator result = Generator();
-  // result.generate_files();
-  cout << result.combine_charts("0.txt", "1.txt");
-
-
 }

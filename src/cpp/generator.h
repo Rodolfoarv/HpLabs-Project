@@ -1,3 +1,5 @@
+// Author: Rodolfo Andrés Ramírez Valenzuela
+
 #include <vector>
 #include <string>
 #include <map>
@@ -16,7 +18,5 @@ public:
   void generate_files();
   string read_file(const string& name);
   string combine_charts(const string& c1, const string& c2);
-  float mean();
-  float standard_deviation();
 
 };

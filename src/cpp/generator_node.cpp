@@ -1,3 +1,5 @@
+// Author: Rodolfo Andrés Ramírez Valenzuela
+
 #include <node.h>
 #include <v8.h>
 #include <uv.h>
@@ -12,11 +14,14 @@
 using namespace v8;
 Generator gen = Generator();
 
+//Function that wil generate the initial setup of the files, it is connected with C++ and Node.js
 void GenerateFiles(const v8::FunctionCallbackInfo<v8::Value>& args){
   gen.generate_files();
 }
 
 //The reason the function is called GetData in mayus is dictated by the node/v8 API
+//Functions that connects Node.js with C++, it will request the C++ code to read a file
+// get the contents and return it back to node.js
 void GetChartData(const v8::FunctionCallbackInfo<v8::Value>& args) {
   v8::String::Utf8Value name(args[0]->ToString());
   std::string filename = std::string(*name);
@@ -26,6 +31,7 @@ void GetChartData(const v8::FunctionCallbackInfo<v8::Value>& args) {
 
 }
 
+//Function that will request the C++ code to combine the charts then return them as content
 void GetCombinedChart(const v8::FunctionCallbackInfo<v8::Value>& args) {
   v8::String::Utf8Value file1(args[0]->ToString());
   v8::String::Utf8Value file2(args[1]->ToString());
@@ -38,6 +44,7 @@ void GetCombinedChart(const v8::FunctionCallbackInfo<v8::Value>& args) {
 
 }
 
+//function that will associate node.js with c++
 void init(Handle <Object> exports, Handle<Object> module) {
  // we'll register our functions to make them callable from node here..
  NODE_SET_METHOD(exports, "get_chart_data", GetChartData);
