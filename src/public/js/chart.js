@@ -3,7 +3,6 @@
 $(document).ready(() =>{
   $('#form_file_name').submit(create_chart);
   $('#form_compare').submit(compare_charts);
-  // google.charts.load("current", {packages:["controls"]});
   google.charts.load('current', {'packages':['corechart', 'controls']});
   notify_user("Welcome to <b>HpLabs Chart Project</b> to get started write the name of the textfile", 'info');
 
@@ -64,7 +63,12 @@ function compare_charts(event){
           var bucketNumber = $('#tf_bucket_number').val();
           var min = $('#tf_min').val();
           var max = $('#tf_max').val();
-          generate_chart(result.name, result.data, bucketSize, bucketNumber,min,max);
+          if (min == '' && max == ''){
+          generate_chart(result.name, result.data, bucketSize, bucketNumber);
+          }else{
+            generate_chart(result.name, result.data, bucketSize, bucketNumber,min,max);
+          }
+
         }else{
           notify_user("The file <b>" + result.name + "</b> does not exist", 'danger')
         }
