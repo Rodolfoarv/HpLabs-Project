@@ -3,10 +3,22 @@
     <div class="row">
       <div class="col-md-4">
 				<form id="form_file_name" method="POST">
-					<input type="text" class="form-control" id="tf_filename" placeholder="Enter the name of the text file.. e.g '1' "/>
+          <p> Text File: </p>
+					<input type="text" class="form-control" id="tf_filename" placeholder="Enter the name of the text file.. e.g '1'" value="1"/>
+          <h4> Configuration (values may be skipped) </h4>
+          <input type="text" class="form-control" id="tf_bucketsize" placeholder="Introduce bucketsize e.g 0.5" />
+				  <br>
+          <input type="text" class="form-control" id="tf_bucket_number" placeholder="Number of Buckets: i.e 0-1000" />
           <br>
-					<input type="text" class="form-control" id="tf_bucketsize" placeholder="Introduce bucketsize e.g 0.5" />
-				  <br />
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="tf_min" placeholder="Min e.g -4" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="tf_max" placeholder="Max e.g 4" />
+            </div>
+          </div>
+          <br>
 					<button id="btn_create_chart" type="submit" class="btn btn-primary btn"> Draw Chart </button>
         </form>
       </div>

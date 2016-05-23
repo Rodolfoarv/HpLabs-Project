@@ -32,8 +32,12 @@ function compare_charts(event){
     success: result => {
       console.log(result);
       if (result.exists){
+        var bucketSize = $('#tf_bucketsize').val();
+        var bucketNumber = $('#tf_bucket_number').val();
+        var min = $('#tf_min').val();
+        var max = $('#tf_max').val();
         notify_user("The file <b>" + result.name + "</b> has been found successfully", 'success')
-        generate_chart(result.name, result.data);
+        generate_chart(result.name, result.data, bucketSize, bucketNumber, min, max);
       }else{
         notify_user("The file <b>" + result.name + "</b> does not exist", 'danger')
       }
@@ -57,8 +61,10 @@ function compare_charts(event){
         if (result.exists){
           notify_user("The file <b>" + result.name + "</b> has been found successfully", 'success')
           var bucketSize = $('#tf_bucketsize').val();
-          console.log(bucketSize);
-          generate_chart(result.name, result.data, bucketSize);
+          var bucketNumber = $('#tf_bucket_number').val();
+          var min = $('#tf_min').val();
+          var max = $('#tf_max').val();
+          generate_chart(result.name, result.data, bucketSize, bucketNumber,min,max);
         }else{
           notify_user("The file <b>" + result.name + "</b> does not exist", 'danger')
         }
@@ -69,7 +75,7 @@ function compare_charts(event){
 
 //------------------------------------------------------------------------------
 
-function generate_chart(file_title, chart_data, bucketSize = 0){
+function generate_chart(file_title, chart_data, bucketSize = 0, bucketNumber, min = -2.0, max = 2.0){
   $('#chart_title').text(file_title);
   google.charts.setOnLoadCallback(function(){
     var data = google.visualization.arrayToDataTable(chart_data);
@@ -80,7 +86,7 @@ function generate_chart(file_title, chart_data, bucketSize = 0){
       'options': {
         'filterColumnLabel': 'Value',
         },
-      'state': {'lowValue': -2.0, 'highValue': 2.0}
+      'state': {'lowValue': min, 'highValue': max}
       });
 
 
@@ -90,7 +96,10 @@ function generate_chart(file_title, chart_data, bucketSize = 0){
       'containerId': 'chart_div',
       'options': {
         'legend': 'right',
-        'histogram': { 'bucketSize': bucketSize }
+        'histogram': { 'bucketSize': bucketSize,
+                       'maxNumBuckets': bucketNumber,
+                       'minValue': min,
+                       'maxValue': max}
       },
       'view': {'columns': [0,1]}
     });

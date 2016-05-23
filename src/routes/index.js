@@ -61,10 +61,10 @@ router.post('/hplabs/submit_compare/', (req,res) => {
   let result = {};
   console.log(filename1);
   var combined_data = generator.get_combined_chart(filename1, filename2);
-  var chart_data = chart.generate_chart(combined_data);
-  if (chart_data == ""){
+  if (combined_data == ""){
     result = {exists : false, name: filename1};
   }else{
+    var chart_data = chart.generate_chart(combined_data);
     result = {exists: true, data : chart_data, name : filename1 + " & " + filename2 };
   }
   res.json(result);

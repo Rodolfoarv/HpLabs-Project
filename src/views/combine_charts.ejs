@@ -5,7 +5,20 @@
 				<form id="form_compare" method="POST">
 					<input type="text" class="form-control" id="tf_compare1" placeholder="Enter the name of the text file.." />
 					<input type="text" class="form-control" id="tf_compare2" placeholder="Enter the name of the text file.." />
-				  <br />
+				  <br>
+          <input type="text" class="form-control" id="tf_bucketsize" placeholder="Introduce bucketsize e.g 0.5" />
+          <br>
+          <input type="text" class="form-control" id="tf_bucket_number" placeholder="Number of Buckets: i.e 0-1000" />
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="tf_min" placeholder="Min e.g -4" />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" id="tf_max" placeholder="Max e.g 4" />
+            </div>
+          </div>
+          <br>
 					<button id="btn_compare_chart" type="submit" class="btn btn-primary btn"> Draw Chart </button>
         </form>
       </div>
