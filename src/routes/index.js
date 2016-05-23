@@ -46,7 +46,6 @@ router.post('/hplabs/submit_single/', (req,res) => {
   console.log(generator.get_chart_data(filename));
   var chart_data = chart.generate_chart(generator.get_chart_data(filename));
   if (chart_data == ""){
-
     result = {exists : false, name: filename};
   }else{
     result = {exists: true, data : chart_data, name : filename};

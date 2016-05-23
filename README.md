@@ -49,9 +49,3 @@ at any time you can execute the following command to create the build folder.
 
 ### Development View - Package Diagram
 ![](https://github.com/Rodolfoarv/HpLabs-Project/blob/master/images/hplabs_packageDiagram.png)
-
-# TODO
-
-- Add documentation to the generator.cpp file
-- Add animations
-- Add documentation for chart.js

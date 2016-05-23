@@ -135,6 +135,9 @@ string Generator::read_file(const string& name)
 string Generator::combine_charts(const string& c1, const string& c2){
   string data1 = read_file(c1);
   string data2 = read_file(c2);
+  if (data1 == "" || data2 == ""){
+    return "";
+  }
   return read_file(c1).substr(0, data1.size() - 1 ) + "," + read_file(c2);
 }
 

@@ -46,7 +46,7 @@ function compare_charts(event){
         notify_user("The file <b>" + result.name + "</b> has been found successfully", 'success')
         generate_chart(result.name, result.data, bucketSize, bucketNumber, min, max);
       }else{
-        notify_user("The file <b>" + result.name + "</b> does not exist", 'danger')
+        notify_user("Could not generate chart, either missing an argument or file does not exist", 'danger')
       }
     }
   });
