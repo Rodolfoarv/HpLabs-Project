@@ -23,6 +23,7 @@ The directory structure for the application is as follows:
 
     #Setup the project
     Clone the repository and execute the following commands:
+
     git clone https://github.com/Rodolfoarv/HpLabs-Project.git
     cd HpLabs-Project/src
 
@@ -45,6 +46,9 @@ at any time you can execute the following command to create the build folder.
 
 ### Logical View - Activity Diagram
 ![](https://github.com/Rodolfoarv/HpLabs-Project/blob/master/images/hplabs_activityDiagram.png)
+
+### Development View - Package Diagram
+![](https://github.com/Rodolfoarv/HpLabs-Project/blob/master/images/hplabs_packageDiagram.png)
 
 # TODO
 
