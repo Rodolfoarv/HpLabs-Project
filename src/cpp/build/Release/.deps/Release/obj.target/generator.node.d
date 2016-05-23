@@ -1,0 +1,1 @@
+cmd_Release/obj.target/generator.node := g++ -shared -pthread -rdynamic -m64  -Wl,-soname=generator.node -o Release/obj.target/generator.node -Wl,--start-group Release/obj.target/generator/generator.o Release/obj.target/generator/generator_node.o -Wl,--end-group 
