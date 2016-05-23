@@ -29,6 +29,11 @@ The directory structure for the application is as follows:
 
     npm install
 
+    # Build the addon
+    cd HpLabs-Project/src/cpp
+    sudo apt-get install node-gyp
+    node-gyp configure build
+
     #Run application
     npm start
 
