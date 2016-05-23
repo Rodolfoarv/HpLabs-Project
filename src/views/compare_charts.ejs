@@ -1,0 +1,35 @@
+<div class="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+				<form id="form_compare" method="POST">
+					<input type="text" class="form-control" id="tf_compare1" placeholder="Enter the name of the text file.." />
+					<input type="text" class="form-control" id="tf_compare2" placeholder="Enter the name of the text file.." />
+				  <br />
+					<button id="btn_compare_chart" type="submit" class="btn btn-primary btn"> Draw Chart </button>
+        </form>
+      </div>
+
+      <div class="col-md-8">
+        <div class="card">
+          <div class="header">
+            <h4 class="title" id="chart_title">Chart</h4>
+          </div>
+        	<div class="content">
+						<div id="dashboard_div">
+							<div id="filter_div"></div>
+	              <!-- <div id="chart_div" class="ct-chart"></div> -->
+	              <div id="chart_div"></div>
+                	<div class="footer">
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-history"></i> Updated 3 minutes ago
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
