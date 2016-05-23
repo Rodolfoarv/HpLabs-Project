@@ -21,18 +21,23 @@ function promisify(fun) {
 /* GET home page. */
 router.get('/', function(req, res, next) {
   generator.generate_files();
-  res.render('index', { title: 'Express'
-                        });
+  res.render('index', { title: 'Express',
+                        page_name: 'index'});
 });
 
 router.get('/student_information', function(req, res, next) {
   generator.generate_files();
-  res.render('student_information', {});
+  res.render('student_information', {page_name: 'student_information'});
 });
 
 router.get('/combine_charts', function(req, res, next) {
   generator.generate_files();
-  res.render('combine_charts', {});
+  res.render('combine_charts', {page_name: 'combine_charts'});
+});
+
+router.get('/documentation', function(req, res, next) {
+  generator.generate_files();
+  res.render('documentation', {page_name: 'documentation'});
 });
 
 router.post('/hplabs/submit_single/', (req,res) => {

@@ -48,21 +48,28 @@
 
             <ul class="nav">
                 <li class="active">
+									<li <% if (page_name === 'index') { %>class="active" <% } %>>
                     <a href="/">
                         <i class="pe-7s-graph"></i>
                         <p>Single File Upload</p>
                     </a>
                 </li>
-                <li>
+                <li <% if (page_name === 'combine_charts') { %>class="active" <% } %>>
                     <a href="/combine_charts">
                         <i class="pe-7s-graph2"></i>
-                        <p>Compare Charts</p>
+                        <p>Combine Charts</p>
                     </a>
                 </li>
-                <li>
+                <li <% if (page_name === 'student_information') { %>class="active" <% } %>>
                     <a href="/student_information">
                         <i class="pe-7s-user"></i>
                         <p>Student Information</p>
+                    </a>
+                </li>
+                <li <% if (page_name === 'documentation') { %>class="active" <% } %>>
+                    <a href="/documentation">
+                        <i class="pe-7s-file"></i>
+                        <p>Project Documentation</p>
                     </a>
                 </li>
 
