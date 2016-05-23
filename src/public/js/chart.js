@@ -1,9 +1,8 @@
 'use strict'
 
-
-
 $(document).ready(() =>{
   $('#form_file_name').submit(create_chart);
+  $('#form_compare').submit(compare_charts);
   // google.charts.load("current", {packages:["controls"]});
   google.charts.load('current', {'packages':['corechart', 'controls']});
   notify_user("Welcome to <b>HpLabs Chart Project</b> to get started write the name of the textfile", 'info');
@@ -19,12 +18,37 @@ $(document).ready(() =>{
       });
   }
 
+
+function compare_charts(event){
+  event.preventDefault();
+  var filename1 = $('#tf_compare1').val().trim();
+  var filename2 = $('#tf_compare2').val().trim();
+  $.ajax({
+    url: '/hplabs/submit_compare/',
+    type: 'POST',
+    dataType: 'json',
+    data: {filename1: filename1,
+           filename2: filename2},
+    success: result => {
+      console.log(result);
+      if (result.exists){
+        notify_user("The file <b>" + result.name + "</b> has been found successfully", 'success')
+        generate_chart(result.name, result.data);
+      }else{
+        notify_user("The file <b>" + result.name + "</b> does not exist", 'danger')
+      }
+    }
+  });
+}
+
+
+
 //------------------------------------------------------------------------------
   function create_chart(event){
     event.preventDefault();
     var filename = $('#tf_filename').val().trim();
     $.ajax({
-      url: '/hplabs/',
+      url: '/hplabs/submit_single/',
       type: 'POST',
       dataType: 'json',
       data: {filename: filename},
@@ -39,7 +63,7 @@ $(document).ready(() =>{
       }
     });
   }
-});
+
 
 //------------------------------------------------------------------------------
 
@@ -74,3 +98,4 @@ function generate_chart(file_title, chart_data){
   });
 
 }
+});

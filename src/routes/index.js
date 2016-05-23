@@ -24,15 +24,42 @@ router.get('/', function(req, res, next) {
                         });
 });
 
+router.get('/student_information', function(req, res, next) {
+  res.render('student_information', {});
+});
 
-router.post('/hplabs/', (req,res) => {
-  let filename = req.body.filename;
+router.get('/compare_charts', function(req, res, next) {
+  res.render('compare_charts', {});
+});
+
+
+
+router.post('/hplabs/submit_single/', (req,res) => {
+  let filename = req.body.filename + '.txt';
   let result = {};
+  console.log(generator.get_chart_data(filename));
   var chart_data = chart.generate_chart(generator.get_chart_data(filename));
   if (chart_data == ""){
+
     result = {exists : false, name: filename};
   }else{
     result = {exists: true, data : chart_data, name : filename};
+  }
+  res.json(result);
+
+});
+
+router.post('/hplabs/submit_compare/', (req,res) => {
+  let filename1 = req.body.filename1 + '.txt';
+  let filename2 = req.body.filename2 + '.txt';
+  let result = {};
+  console.log(filename1);
+  var combined_data = generator.get_combined_chart(filename1, filename2);
+  var chart_data = chart.generate_chart(combined_data);
+  if (chart_data == ""){
+    result = {exists : false, name: filename1};
+  }else{
+    result = {exists: true, data : chart_data, name : filename1 + " & " + filename2 };
   }
   res.json(result);
 

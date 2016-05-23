@@ -1,5 +1,6 @@
 module.exports = {
   generate_chart: function(data) {
+    console.log(data);
     if (data == ""){
       return "";
     }
@@ -9,7 +10,6 @@ module.exports = {
     });
     chart_array.unshift(['Concept', 'Value']);
     return chart_array;
-  }
-
+  },
 
 }
