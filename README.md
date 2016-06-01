@@ -54,3 +54,7 @@ at any time you can execute the following command to create the build folder.
 
 ### Development View - Package Diagram
 ![](https://github.com/Rodolfoarv/HpLabs-Project/blob/master/images/hplabs_packageDiagram.png)
+
+### Node - C++ Thread Workflow
+
+![](https://raw.githubusercontent.com/freezer333/node-v8-workers/master/imgs/inplace.gif)
